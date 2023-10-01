@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import com.panther.contentai.databinding.FragmentOnboardingScreenBinding
 
 
 class OnboardingScreen : Fragment() {
+    lateinit var binding :FragmentOnboardingScreenBinding
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = FragmentOnboardingScreenBinding.inflate(layoutInflater)
 
     }
 
@@ -21,8 +24,7 @@ class OnboardingScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_onboarding_screen, container, false)
+        return binding.root
     }
-
 
 }
