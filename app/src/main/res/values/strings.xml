@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Content AI</string>
+
+    <string name="onboard_text">Discover personalized<br>
+                                content with our AI</br></string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="get_started">Get Started</string>
+    <string name="content_ai">Content AI</string>
+    <string name="email_signup">Sign up with Email</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="sign_up">Sign Up</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
