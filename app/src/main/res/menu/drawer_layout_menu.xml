@@ -11,7 +11,7 @@
         <item
             android:icon="@drawable/baseline_history"
             android:title="History"
-            android:id="@+id/history_dest"/>
+            android:id="@+id/history"/>
 
         <item
             android:icon="@drawable/baseline_settings"

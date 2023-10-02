@@ -45,4 +45,9 @@
     <action
         android:id="@+id/action_global_subscription"
         app:destination="@id/subscription" />
+    <fragment
+        android:id="@+id/history"
+        android:name="com.panther.contentai.fragments.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>
