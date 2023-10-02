@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.panther.contentai.databinding.FragmentEmailAuthScreenBinding
 
 
 class EmailAuthScreen : Fragment() {
-lateinit var emailBinding:FragmentEmailAuthScreenBinding
+    private lateinit var emailBinding: FragmentEmailAuthScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,5 +27,11 @@ lateinit var emailBinding:FragmentEmailAuthScreenBinding
         return emailBinding.root
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        emailBinding.signUpBtn.setOnClickListener {
+            val route = EmailAuthScreenDirections.actionEmailAuthScreenToChatDest()
+            findNavController().navigate(route)
+        }
     }
+}

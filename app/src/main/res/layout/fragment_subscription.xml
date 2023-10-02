@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.Subscription">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="32dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/header_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="10dp"
+        android:text="Content AI\nPlus"
+        android:textColor="@color/orange"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn" />
+
+
+    <ImageView
+        android:id="@+id/point1_img"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/person_icon"
+        app:layout_constraintStart_toStartOf="@+id/header_text"
+        app:layout_constraintTop_toTopOf="@+id/point1_text" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/point1_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="34dp"
+        android:text="Unlock Premium for a hyper-personalized content journey. "
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintEnd_toEndOf="@+id/header_text"
+        app:layout_constraintStart_toEndOf="@+id/point1_img"
+        app:layout_constraintTop_toBottomOf="@+id/header_text" />
+
+    <ImageView
+        android:id="@+id/point2_img"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/lightning_icon"
+        app:layout_constraintStart_toStartOf="@+id/header_text"
+        app:layout_constraintTop_toTopOf="@+id/point2_text" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/point2_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Enjoy unrestricted access to our content library, exploring as many entries as you desire. Dive deeper into your interests with no limits"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintEnd_toEndOf="@+id/header_text"
+        app:layout_constraintStart_toEndOf="@+id/point2_img"
+        app:layout_constraintTop_toBottomOf="@id/point1_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/subscribe_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="@color/orange"
+        android:padding="12dp"
+        android:text="Subscribe"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/point2_text"
+        app:layout_constraintStart_toStartOf="@+id/point2_img"
+        app:layout_constraintTop_toBottomOf="@id/point2_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

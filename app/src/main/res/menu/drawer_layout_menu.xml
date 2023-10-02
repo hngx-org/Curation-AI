@@ -6,7 +6,7 @@
             android:icon="@drawable/baseline_add"
             android:title="New Chat"
             android:iconTint="@color/orange"
-            android:id="@+id/new_chat_dest"/>
+            android:id="@+id/chat_dest"/>
 
         <item
             android:icon="@drawable/baseline_history"

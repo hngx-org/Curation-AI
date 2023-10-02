@@ -14,6 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:padding="8dp"
         android:background="@drawable/send_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/send_image_view"
@@ -21,12 +22,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/message_et"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
             android:background="@color/orange_light"
             android:hint="Message"
             android:textSize="18sp"

@@ -5,5 +5,11 @@
          <item name="colorPrimary">@color/orange</item>
     </style>
 
-    <style name="Theme.ContentAI" parent="Base.Theme.ContentAI" />
+    <style name="Theme.ContentAI" parent="Base.Theme.ContentAI">
+        <item name="drawerArrowStyle">@style/DrawerIconStyle</item>
+    </style>
+
+    <style name="DrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/orange</item>
+    </style>
 </resources>
