@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.panther.contentai.R
 import com.panther.contentai.databinding.FragmentHistoryBinding
@@ -23,9 +24,16 @@ class History : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            isEnabled = true
+            val route = HistoryDirections.actionHistoryToChatDest()
+            findNavController().navigate(route)
+        }
+
         changeSearchViewPlate()
         binding.backBtn.setOnClickListener {
-            findNavController().navigate(R.id.chat_dest)
+            val route = HistoryDirections.actionHistoryToChatDest()
+            findNavController().navigate(route)
         }
     }
 
