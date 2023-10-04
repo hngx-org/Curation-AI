@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 class EmailAuthScreen : Fragment() {
     private lateinit var emailBinding: FragmentEmailAuthScreenBinding
     private val curatorViewModel by activityViewModels<CuratorViewModel>()
-    private var exitAppToastStillShowing = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +40,6 @@ class EmailAuthScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            isEnabled = true
-            exitApp()
-        }
-
 
         emailBinding.signUpBtn.setOnClickListener {
             val name = emailBinding.editTextName.text.toString()
@@ -102,24 +96,4 @@ class EmailAuthScreen : Fragment() {
             }
         }
     }
-
-    private val exitAppTimer = object : CountDownTimer(2000, 1000) {
-        override fun onTick(millisUntilFinished: Long) {}
-        override fun onFinish() {
-            exitAppToastStillShowing = false
-        }
-    }
-
-    private fun exitApp() {
-        if (exitAppToastStillShowing) {
-            requireActivity().finish()
-            return
-        }
-
-        Toast.makeText(this.requireContext(), "Tap again to exit", Toast.LENGTH_SHORT)
-            .show()
-        exitAppToastStillShowing = true
-        exitAppTimer.start()
-    }
-
 }

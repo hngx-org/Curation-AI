@@ -15,6 +15,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.panther.contentai.R
 import com.panther.contentai.arch_comp.CuratorViewModel
@@ -35,7 +36,7 @@ class ChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentChatBinding.inflate(inflater, container, false)
-        showMenu()
+        showMenu(savedInstanceState)
         return binding.root
     }
 
@@ -72,7 +73,7 @@ class ChatFragment : Fragment() {
         exitAppTimer.start()
     }
 
-    private fun showMenu() {
+    private fun showMenu(savedInstanceState: Bundle?) {
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.main_menu, menu)
@@ -82,7 +83,7 @@ class ChatFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.new_chat_dest -> {
                         curatorViewModel.logOut()
-                        observeSignOutState()
+                        observeSignOutState(savedInstanceState)
                         true
                     }
 
@@ -93,7 +94,7 @@ class ChatFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
     }
 
-    private fun observeSignOutState() {
+    private fun observeSignOutState(savedInstanceState: Bundle?) {
         lifecycleScope.launch {
             curatorViewModel.logOutState.collect { state ->
                 when (state) {
@@ -109,7 +110,10 @@ class ChatFragment : Fragment() {
                                 ChatFragmentDirections.actionChatDestToSigninScreen()
                             findNavController().navigate(route)
                         }catch (e:Exception){
-                            findNavController().navigate(R.id.signinScreen)
+                            val navOptions = NavOptions.Builder()
+                                .setPopUpTo(R.id.emailAuthScreen, true)
+                                .build()
+                            findNavController().navigate(R.id.signinScreen,savedInstanceState,navOptions)
                         }
 
                         Toast.makeText(requireContext(), "Sign out successful", Toast.LENGTH_SHORT)
