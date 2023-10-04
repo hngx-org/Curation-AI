@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/back_btn"
         app:layout_constraintTop_toTopOf="@+id/back_btn"
-        app:queryHint="Search Snack" />
+        app:queryHint="Search" />
 
 
 
