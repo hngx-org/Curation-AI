@@ -7,15 +7,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.panther.contentai.arch_comp.CuratorViewModel
+import com.panther.contentai.data.CuratorSharedPreference
 import com.panther.contentai.databinding.ActivityMainBinding
 import com.panther.contentai.fragments.SubscriptionDirections
 import com.panther.contentai.util.Resource
@@ -31,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val sharedPref = CuratorSharedPreference.initSharedPref(this)
+        CuratorSharedPreference.initSharedPref(this)
 
         setSupportActionBar(binding.toolbar)
 
@@ -52,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         if (!firstLaunch){
             navController.navigate(R.id.signinScreen)
         }
-
         navController.addOnDestinationChangedListener{_,destination,_->
             binding.toolbar.isVisible = destination.id == R.id.chat_dest
             if (appBarConfiguration.topLevelDestinations.contains(destination.id)){

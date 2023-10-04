@@ -16,10 +16,9 @@ import kotlinx.coroutines.launch
 
 class CuratorViewModel : ViewModel() {
 
-//    private val apiService = AuthLibrary.createAuthService()
-//    private val signupRepository = AuthLibrary.createSignupRepository(apiService)
-
     var userDataState = MutableStateFlow<Resource<UserData>>(Resource.Loading())
+        private set
+    var logOutState = MutableStateFlow<Resource<String>>(Resource.Loading())
         private set
 
     fun signUpUser(name: String, email: String, password: String, confirmPassword: String) {
@@ -86,6 +85,38 @@ class CuratorViewModel : ViewModel() {
                 // Handle any exceptions that may occur during the coroutine execution
                 Log.d("AUTH RESPONSE", "Exception: $e")
                 userDataState.value = Resource.Failure(e.message)
+                e.printStackTrace()
+            }
+
+
+        }
+    }
+    fun logOut() {
+        logOutState.value = Resource.Loading()
+        val apiService = AuthLibrary.createAuthService()
+        val logOutRepository = AuthLibrary.createLogoutRepository(apiService)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = logOutRepository.logout()
+
+                when (result) {
+                    is ApiResponse.Success -> {
+                        val data = result.data
+                        Log.d("AUTH RESPONSE", "logOut-Success: $data")
+                        logOutState.value = Resource.Successful(result.data.message)
+                    }
+
+                    is ApiResponse.Error -> {
+                        val errorMessage = result.message
+                        Log.d("AUTH RESPONSE", "logOut-Failure: $errorMessage")
+                        logOutState.value = Resource.Failure(errorMessage)
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle any exceptions that may occur during the coroutine execution
+                Log.d("AUTH RESPONSE", "Exception: $e")
+                logOutState.value = Resource.Failure(e.message)
                 e.printStackTrace()
             }
 

@@ -1,18 +1,19 @@
 package com.panther.contentai
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.panther.contentai.arch_comp.CuratorViewModel
 import com.panther.contentai.databinding.FragmentLogInBinding
 import com.panther.contentai.util.Resource
+import com.panther.contentai.util.isValid
 import kotlinx.coroutines.launch
 
 
@@ -65,12 +66,11 @@ class LogIn : Fragment() {
                             }catch (e:Exception){
                                 findNavController().navigate(R.id.chat_dest)
                             }
-
                         }
 
                         is Resource.Failure -> {
                             progressBar.isVisible = false
-                            Toast.makeText(requireContext(), state.msg, Toast.LENGTH_SHORT)
+                            Toast.makeText(requireContext(), state.msg.isValid("Oops.. Unable to sign up"), Toast.LENGTH_SHORT)
                                 .show()
 
                         }

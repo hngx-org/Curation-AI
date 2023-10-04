@@ -1,11 +1,12 @@
-package com.panther.contentai
+package com.panther.contentai.data
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.panther.contentai.util.CURATOR_PREFERENCE
+import com.panther.contentai.util.FIRST_LAUNCH
 
-const val CURATOR_PREFERENCE = "Events shared preference"
-const val FIRST_LAUNCH = "Application First Launch"
+
 class CuratorSharedPreference {
     private val editor = sharedPref?.edit()
 
