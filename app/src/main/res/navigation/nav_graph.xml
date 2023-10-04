@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_signinScreen_to_emailAuthScreen"
             app:destination="@id/emailAuthScreen" />
+        <action
+            android:id="@+id/action_signinScreen_to_logIn"
+            app:destination="@id/logIn" />
     </fragment>
     <fragment
         android:id="@+id/subscription"
@@ -50,4 +53,13 @@
         android:name="com.panther.contentai.fragments.History"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.panther.contentai.LogIn"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logIn_to_chat_dest"
+            app:destination="@id/chat_dest" />
+    </fragment>
 </navigation>

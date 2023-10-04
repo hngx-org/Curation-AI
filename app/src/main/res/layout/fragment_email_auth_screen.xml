@@ -23,18 +23,18 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="340dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginTop="24dp"
         android:hint="Name"
-        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextName"
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLines="1"
@@ -44,13 +44,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="340dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="20dp"
         android:hint="Email"
-        android:paddingBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nameLayout"
+        app:layout_constraintStart_toStartOf="@+id/nameLayout"
         app:layout_constraintTop_toBottomOf="@+id/nameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -65,13 +64,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/confirmPasswordLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="340dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="20dp"
         android:hint="Confirm Password"
-        android:paddingBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nameLayout"
+        app:layout_constraintStart_toStartOf="@+id/nameLayout"
         app:layout_constraintTop_toBottomOf="@+id/messageLayout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,13 +84,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/messageLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="340dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="20dp"
         android:hint="Password"
-        android:paddingBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nameLayout"
+        app:layout_constraintStart_toStartOf="@+id/nameLayout"
         app:layout_constraintTop_toBottomOf="@+id/emailLayout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -106,16 +103,26 @@
 
     <Button
         android:id="@+id/sign_up_btn"
-        android:layout_width="340dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="@string/sign_up"
         android:textSize="17sp"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nameLayout"
+        app:layout_constraintStart_toStartOf="@+id/nameLayout"
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordLayout" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:progressDrawable="@drawable/loading_anim"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_btn"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_btn"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

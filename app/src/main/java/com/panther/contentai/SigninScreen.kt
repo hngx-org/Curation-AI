@@ -36,6 +36,10 @@ class SigninScreen : Fragment() {
             val route = SigninScreenDirections.actionSigninScreenToEmailAuthScreen()
             findNavController().navigate(route)
         }
+        binding.loginText.setOnClickListener {
+            val route = SigninScreenDirections.actionSigninScreenToLogIn()
+            findNavController().navigate(route)
+        }
     }
 
 

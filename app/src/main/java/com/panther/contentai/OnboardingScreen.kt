@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.panther.contentai.databinding.FragmentOnboardingScreenBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class OnboardingScreen : Fragment() {
@@ -31,6 +33,7 @@ class OnboardingScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnGetStarted.setOnClickListener {
+            CuratorSharedPreference().updateSharedPref(false)
             val route = OnboardingScreenDirections.actionOnboardingScreenToSigninScreen()
             findNavController().navigate(route)
         }
