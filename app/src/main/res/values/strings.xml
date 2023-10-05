@@ -9,7 +9,8 @@
     <string name="email_signup">Sign up with Email</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="sign_up">Sign Up</string>
-    <string name="login">Already have an account?<u>Login</u> </string>
+    <string name="sign_in">Sign In</string>
+    <string name="login">Already have an account? <u>Login</u> </string>
 
 
 </resources>

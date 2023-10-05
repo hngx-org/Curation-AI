@@ -9,7 +9,13 @@
         android:id="@+id/chat_dest"
         android:name="com.panther.contentai.fragments.ChatFragment"
         android:label="Chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chat_dest_to_signinScreen"
+            app:destination="@id/signinScreen"
+            app:popUpTo="@id/signinScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/emailAuthScreen"
         android:name="com.panther.contentai.EmailAuthScreen"
@@ -36,6 +42,9 @@
         <action
             android:id="@+id/action_signinScreen_to_emailAuthScreen"
             app:destination="@id/emailAuthScreen" />
+        <action
+            android:id="@+id/action_signinScreen_to_logIn"
+            app:destination="@id/logIn" />
     </fragment>
     <fragment
         android:id="@+id/subscription"
@@ -57,5 +66,15 @@
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"
             />
+    </fragment>
+
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.panther.contentai.LogIn"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logIn_to_chat_dest"
+            app:destination="@id/chat_dest" />
     </fragment>
 </navigation>

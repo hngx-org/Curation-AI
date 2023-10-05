@@ -1,11 +1,12 @@
 package com.panther.contentai
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.panther.contentai.data.CuratorSharedPreference
 import com.panther.contentai.databinding.FragmentOnboardingScreenBinding
 
 
@@ -31,6 +32,7 @@ class OnboardingScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnGetStarted.setOnClickListener {
+            CuratorSharedPreference().updateSharedPref(false)
             val route = OnboardingScreenDirections.actionOnboardingScreenToSigninScreen()
             findNavController().navigate(route)
         }
