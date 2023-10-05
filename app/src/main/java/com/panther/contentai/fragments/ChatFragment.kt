@@ -66,8 +66,13 @@ class ChatFragment : Fragment(), MenuProvider {
             CoroutineScope(Dispatchers.IO).launch {
 
                 //Getting the user cookie/Id
-                var cookie: String = ""
-                cookie = RetrofitClient.getCookiesForUrl().toString()
+                val sessionCookie = "ession=96227082-c61d-4f12-90d8-dd9fc4a7a11b.meKUKXc5b3UoWQZ8kqja2giM5Zc; Expires=Sat, 04 Nov 2023 20:07:28 GMT; Path=/;"
+                val cookie: String = "session=96227082-c61d-4f12-90d8-dd9fc4a7a11b.meKUKXc5b3UoWQZ8kqja2giM5Zc"
+
+                val test = sessionCookie.substring(0, sessionCookie.indexOf(";"))
+                Log.d("sessionCookie", "Cookie $test")
+
+               //cookie = RetrofitClient.getCookiesForUrl().toString()
                 Log.d("cookie", "Cookie generated: $cookie")
 
                 //Instantiate OpenAI
@@ -75,6 +80,7 @@ class ChatFragment : Fragment(), MenuProvider {
                 // Generate a response based on the user's input
                 val response =
                     openApiClient.generateChatResponse(messageTxt.toString(), cookie)
+                Log.i("Test", "The response is $response")
 
                 // Update the UI on the main thread
                 withContext(Dispatchers.Main) {
@@ -137,8 +143,8 @@ class ChatFragment : Fragment(), MenuProvider {
         chatadapter = AiChatAdapter()
 
         binding.recyclerview.apply {
-            val layoutManager = LinearLayoutManager(activity)
-            layoutManager.reverseLayout = true
+            layoutManager = LinearLayoutManager(activity)
+            //layoutManager.reverseLayout = true
             adapter = chatadapter
 
             chatViewModel.chatMessages.observe(viewLifecycleOwner) { receivedMessage ->
