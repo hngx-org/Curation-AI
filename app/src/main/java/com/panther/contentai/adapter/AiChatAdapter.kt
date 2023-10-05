@@ -21,7 +21,7 @@ class AiChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val differCallBack = object: DiffUtil.ItemCallback<Chat>() {
         override fun areItemsTheSame(oldItem: Chat, newItem: Chat): Boolean {
-            return oldItem.sessionId == newItem.sessionId
+            return oldItem.cookie == newItem.cookie
         }
 
         override fun areContentsTheSame(oldItem: Chat, newItem: Chat): Boolean {
@@ -75,7 +75,7 @@ class AiChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
         val chat = differ.currentList[position]
 
-        return when (chat.sessionId) {
+        return when (chat.cookie) {
 
             chat.userMessage -> {
                 VIEW_TYPE_SENDER

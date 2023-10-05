@@ -2,6 +2,7 @@ package com.panther.contentai.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -23,6 +24,7 @@ import com.panther.contentai.models.Chat
 import com.shegs.hng_auth_library.authlibrary.AuthLibrary
 import com.shegs.hng_auth_library.model.AuthResponse
 import com.shegs.hng_auth_library.network.ApiResponse
+import com.shegs.hng_auth_library.network.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,21 +65,26 @@ class ChatFragment : Fragment(), MenuProvider {
 
             CoroutineScope(Dispatchers.IO).launch {
 
+                //Getting the user cookie/Id
+                var cookie: String = ""
+                cookie = RetrofitClient.getCookiesForUrl().toString()
+                Log.d("cookie", "Cookie generated: $cookie")
+
                 //Instantiate OpenAI
                 val openApiClient = OpenAiCaller
                 // Generate a response based on the user's input
                 val response =
-                    openApiClient.generateChatResponse(messageTxt.toString(), UUID.randomUUID().toString())
+                    openApiClient.generateChatResponse(messageTxt.toString(), cookie)
 
                 // Update the UI on the main thread
                 withContext(Dispatchers.Main) {
                     val userChatMessage =
-                        Chat(UUID.randomUUID().toString(), null, messageTxt.toString(), "User")
+                        Chat(cookie, null, messageTxt.toString(), "User")
                     chatViewModel.addMessage(userChatMessage)
                     messageTxt?.clear()
 
                     val aiChatMessage =
-                        Chat(UUID.randomUUID().toString(), response, null, "AI")
+                        Chat(cookie, response, null, "AI")
                     chatViewModel.addMessage(aiChatMessage)
                 }
 
@@ -138,7 +145,7 @@ class ChatFragment : Fragment(), MenuProvider {
 
                 chatadapter.differ.submitList(receivedMessage)
                 // This scrolls to the latest message
-                smoothScrollToPosition(receivedMessage.size -1)
+                //smoothScrollToPosition(receivedMessage.size -1)
             }
         }
     }
