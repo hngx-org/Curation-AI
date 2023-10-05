@@ -12,11 +12,28 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.MenuProvider
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.apilibrary.wrapperclass.OpenAiCaller
+import com.panther.contentai.viewmodel.ChatViewModel
 import com.panther.contentai.R
+import com.panther.contentai.adapter.AiChatAdapter
 import com.panther.contentai.databinding.FragmentChatBinding
+import com.panther.contentai.models.Chat
+import com.shegs.hng_auth_library.authlibrary.AuthLibrary
+import com.shegs.hng_auth_library.model.AuthResponse
+import com.shegs.hng_auth_library.network.ApiResponse
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.UUID
 
 class ChatFragment : Fragment(), MenuProvider {
 
+
+    private lateinit var chatadapter: AiChatAdapter
+    private lateinit var chatViewModel: ChatViewModel
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
     private var exitAppToastStillShowing = false
@@ -36,8 +53,40 @@ class ChatFragment : Fragment(), MenuProvider {
             isEnabled = true
             exitApp()
         }
+        chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
+
+        setupRecyclerView()
+
+
+        binding.sendBtnImageView.setOnClickListener {
+            val messageTxt = binding.messageEt.text
+
+            CoroutineScope(Dispatchers.IO).launch {
+
+                //Instantiate OpenAI
+                val openApiClient = OpenAiCaller
+                // Generate a response based on the user's input
+                val response =
+                    openApiClient.generateChatResponse(messageTxt.toString(), UUID.randomUUID().toString())
+
+                // Update the UI on the main thread
+                withContext(Dispatchers.Main) {
+                    val userChatMessage =
+                        Chat(UUID.randomUUID().toString(), null, messageTxt.toString(), "User")
+                    chatViewModel.addMessage(userChatMessage)
+                    messageTxt?.clear()
+
+                    val aiChatMessage =
+                        Chat(UUID.randomUUID().toString(), response, null, "AI")
+                    chatViewModel.addMessage(aiChatMessage)
+                }
+
+            }
+        }
+
 
     }
+
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -74,6 +123,24 @@ class ChatFragment : Fragment(), MenuProvider {
             .show()
         exitAppToastStillShowing = true
         exitAppTimer.start()
+    }
+
+    private fun setupRecyclerView() {
+
+        chatadapter = AiChatAdapter()
+
+        binding.recyclerview.apply {
+            val layoutManager = LinearLayoutManager(activity)
+            layoutManager.reverseLayout = true
+            adapter = chatadapter
+
+            chatViewModel.chatMessages.observe(viewLifecycleOwner) { receivedMessage ->
+
+                chatadapter.differ.submitList(receivedMessage)
+                // This scrolls to the latest message
+                smoothScrollToPosition(receivedMessage.size -1)
+            }
+        }
     }
 
 
