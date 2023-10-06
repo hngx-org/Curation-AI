@@ -59,6 +59,7 @@ class AiChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is SendMessageViewHolder -> {
                 holder.binding.apply {
                     userMessageTv.text = chat.userMessage
+                    userAiTv.text = "User"
                     profileImage
                 }
             }

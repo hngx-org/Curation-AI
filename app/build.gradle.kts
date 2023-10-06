@@ -63,9 +63,10 @@ dependencies {
 
     //Open API library
     implementation("com.github.hngx-org:openai-api-library:0.1.3")
+    //Google Pay
+    implementation ("com.github.hngx-org:in-app-purchase-package-:1.2.2")
 
     //viewModel
-
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 }

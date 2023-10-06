@@ -10,6 +10,7 @@ import com.panther.contentai.databinding.FragmentSubscriptionBinding
 
 class Subscription : Fragment() {
    private lateinit var binding:FragmentSubscriptionBinding
+   //val checkoutViewModel = CheckOutViewModel(applicationContext)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,6 +25,10 @@ class Subscription : Fragment() {
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()
         }
+
+
+
+        binding.subscribeBtn.setOnClickListener {  }
     }
 
 }

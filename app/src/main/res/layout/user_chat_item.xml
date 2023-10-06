@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/baseline_person" />
 
     <TextView
-        android:id="@+id/content_ai_tv"
+        android:id="@+id/user_ai_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

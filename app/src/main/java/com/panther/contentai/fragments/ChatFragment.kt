@@ -65,32 +65,31 @@ class ChatFragment : Fragment(), MenuProvider {
 
             CoroutineScope(Dispatchers.IO).launch {
 
-                //Getting the user cookie/Id
-                val sessionCookie = "ession=96227082-c61d-4f12-90d8-dd9fc4a7a11b.meKUKXc5b3UoWQZ8kqja2giM5Zc; Expires=Sat, 04 Nov 2023 20:07:28 GMT; Path=/;"
-                val cookie: String = "session=96227082-c61d-4f12-90d8-dd9fc4a7a11b.meKUKXc5b3UoWQZ8kqja2giM5Zc"
+                var cookie: String = ""
+                cookie = RetrofitClient.getCookiesForUrl().toString()
 
-                val test = sessionCookie.substring(0, sessionCookie.indexOf(";"))
-                Log.d("sessionCookie", "Cookie $test")
+                val sessionCookie = "session=f63db3fd-9f33-4ad0-85c8-4588d1fc473d.cCkHyhUMDB2ww5E9EzSUIMofiPA"
 
-               //cookie = RetrofitClient.getCookiesForUrl().toString()
-                Log.d("cookie", "Cookie generated: $cookie")
+                //Extracting sessionCookie from the cookie
+                //val sessionCookie = cookie.substring(0, cookie.indexOf(";"))
+                Log.d("Cookie", "Cookie generated: $sessionCookie")
 
                 //Instantiate OpenAI
                 val openApiClient = OpenAiCaller
                 // Generate a response based on the user's input
                 val response =
-                    openApiClient.generateChatResponse(messageTxt.toString(), cookie)
+                    openApiClient.generateChatResponse(messageTxt.toString(), sessionCookie)
                 Log.i("Test", "The response is $response")
 
                 // Update the UI on the main thread
                 withContext(Dispatchers.Main) {
                     val userChatMessage =
-                        Chat(cookie, null, messageTxt.toString(), "User")
+                        Chat(sessionCookie, null, null, messageTxt.toString().trim())
                     chatViewModel.addMessage(userChatMessage)
                     messageTxt?.clear()
 
                     val aiChatMessage =
-                        Chat(cookie, response, null, "AI")
+                        Chat(sessionCookie, null, null, response)
                     chatViewModel.addMessage(aiChatMessage)
                 }
 
